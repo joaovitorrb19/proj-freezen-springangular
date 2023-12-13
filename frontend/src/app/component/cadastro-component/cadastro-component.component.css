@@ -1,0 +1,65 @@
+.container-cadastro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    height: fit-content;
+    width: fit-content;
+    top: 250px;
+}
+
+input{
+    width: 250px;
+    border-radius: 5px;
+    text-align: center;
+    height: 20px;
+}
+
+@media screen and (max-width:500px){
+
+    .container-cadastro{
+            left: 15%;
+    }   
+
+}
+
+@media screen and (max-width:1500px) and (min-width:501px){
+    .container-cadastro{
+        left: 30%;
+    }
+}
+
+@media screen and (min-width:1501px){
+    .container-cadastro{
+        left: 40%;
+    }
+}
+
+
+.password{
+    position: absolute;
+}
+
+.img-hidden{
+   width: 20px;
+   right: 7px;
+   height: 20px;
+   position: absolute;
+   cursor: pointer;
+}
+
+div{
+    position: relative;
+    height: 30px;
+}
+
+.erroInput{
+    border: 1px solid rgb(226, 61, 61);
+}
+
+.divBotoes{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

@@ -1,20 +1,33 @@
 .login-modal-pg{
-    display: none;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    margin: 0 0 0 0;
-    overflow: auto;
-    background-color: black;
-    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    left: 30%;
+    top: 250px;
 }
 
-.login-modal-content{
+.divBotoes{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+input{
+    width: 250px;
+    border-radius: 5px;
+    text-align: center;
+    height: 20px;
+}
+
+div{
+    position: relative;
+    height: 30px;
+}
+
+.erroInput{
+    border: 1px solid rgb(226, 61, 61);
 }

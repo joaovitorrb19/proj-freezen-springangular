@@ -1,8 +1,24 @@
-<div id="loginmodal" class="login-modal-pg">
-    <div class="login-modal-content">
-         <div><input type="text"></div>
-        <div><input type="password"></div>
-        <div><button>Login</button></div>
-         <div><button>Esqueci Senha</button></div>
-    </div>
+<div class="login-modal-pg">
+        <form  [formGroup]="formLogin">
+        <div>
+            <input type="text" placeholder="Email" formControlName="email" [ngClass]="{'erroInput' : this.getErrorDirty('email','email') || this.getErrorTouched('email','required')}">
+        </div>
+
+        <div>
+            <input type="password" placeholder="Senha" formControlName="password" 
+            [ngClass]="{'erroInput' : this.getErrorTouched('password','required') || this.getErrorDirty('password','PasswordErro')}">
+        </div>
+
+        <div class="divBotoes">
+            <div>
+                <button type="button" [disabled]="this.formLogin.invalid">Login</button>
+            </div>
+            <div>
+                <button type="button" [routerLink]="'/cadastro'">Cadastrar</button>
+            </div>
+            <div>
+                <button type="button">Esqueci Senha</button>
+            </div>
+        </div>
+    </form>
 </div>

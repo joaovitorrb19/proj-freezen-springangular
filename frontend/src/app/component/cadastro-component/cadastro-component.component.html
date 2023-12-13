@@ -1,1 +1,51 @@
-<p>cadastro-component works!</p>
+<div class="container-cadastro">
+
+    <form [formGroup]="formTest" (ngSubmit)="enviarFormulario()">
+        <div>
+            <input type="text" formControlName="email" id="email" placeholder="Email" 
+            [ngClass]="{'erroInput' : this.getErrorDirty('email','email') || this.getErrorTouched('email','required')}">
+        </div>
+
+        <div>
+            <input type="text" id="nome" formControlName="nome" placeholder="Nome Completo" 
+            [ngClass]="{'erroInput' : this.getErrorTouched('nome','required') || this.getErrorDirty('nome','NomeErro')}">
+        </div>
+
+        <div>
+            <input type="text" id="cpf" placeholder="CPF : 000.000.000-00" formControlName="cpf" 
+            [ngClass]="{'erroInput' : this.getErrorTouched('cpf','required') || (this.getErrorDirty('cpf','CPFErro'))}">
+        </div>
+
+        <div>
+            <input type="text" id="telefone" placeholder="Telefone : 00 0000-0000" formControlName="telefone" 
+            [ngClass]="{'erroInput' : this.getErrorTouched('telefone','required') || this.getErrorDirty('telefone','TelefoneErro')}">
+        </div>
+
+        <div>
+                <input type="{{inputTypePass}}" id="passsword" class="password" placeholder="Senha" formControlName="password" 
+                [ngClass]="{'erroInput' : this.getErrorTouched('password','required') || this.getErrorDirty('password','PasswordErro')}">
+                <img src="/assets/ocultar.png" class="img-hidden" (click)="alterarHiddenPassword()">
+        </div>
+        
+        <div>
+            <input type="{{inputTypeConfPass}}" id="confPassword" class="password" placeholder="Confirmação Senha" formControlName="confPassword"
+                   (blur)="verificarConfSenha()" [ngClass]="{'erroInput' : this.formTest.get('confPassword')?.getError('confPassInvalid')}">
+            <img src="/assets/ocultar.png" class="img-hidden" (click)="alterarHiddenConfPassword()">
+        </div>
+
+        <div class="divBotoes">
+            <div>
+                <button type="button" [disabled]="this.formTest.get('confPassword')?.invalid">Cadastrar</button>
+            </div>
+            <div>
+                <button type="button">Esqueci Senha</button>
+            </div>
+            <div>
+                <button type="button" routerLink="/login">Login</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+

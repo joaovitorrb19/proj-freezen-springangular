@@ -7,6 +7,7 @@ import { ItemlistComponent } from './component/itemlist/itemlist.component';
 import { MenuSuperiorComponent } from './component/menu-superior/menu-superior.component';
 import { LoginComponentComponent } from './component/login-component/login-component.component';
 import { CadastroComponentComponent } from './component/cadastro-component/cadastro-component.component';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -14,11 +15,14 @@ import { CadastroComponentComponent } from './component/cadastro-component/cadas
     ItemlistComponent,
     MenuSuperiorComponent,
     LoginComponentComponent,
-    CadastroComponentComponent
+    CadastroComponentComponent,
+  
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,  
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
