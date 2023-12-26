@@ -1,11 +1,10 @@
-package com.userlogin.v1.dto;
+package com.userlogin.v1.dto.usuario;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 public class CadastroDTO implements Serializable {
 
@@ -28,18 +27,19 @@ public class CadastroDTO implements Serializable {
     private String telefone;
 
     @NotBlank(message = "Data de nascimento não pode ficar vazia")
-    private LocalDate nascimento;
+    @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "data invalida")
+    private String nascimento;
 
     public CadastroDTO() {
     }
 
-    public CadastroDTO(String nome, String cpf, String email, String password, String telefone,LocalDate localDate) {
+    public CadastroDTO(String nome, String cpf, String email, String password, String telefone,String nascimento) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.password = password;
         this.telefone = telefone;
-        this.nascimento = localDate;
+        this.nascimento = nascimento;
     }
 
     public String getNome() {
@@ -82,11 +82,11 @@ public class CadastroDTO implements Serializable {
         this.telefone = telefone;
     }
 
-    public LocalDate getNascimento() {
+    public String getNascimento() {
         return nascimento;
     }
 
-    public void setNascimento(LocalDate nascimento) {
+    public void setNascimento(String nascimento) {
         this.nascimento = nascimento;
     }
 }

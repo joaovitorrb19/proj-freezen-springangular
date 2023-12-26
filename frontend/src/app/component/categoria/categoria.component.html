@@ -1,0 +1,47 @@
+
+
+<div class="containerGeral">
+        <div><h1>Menu de Categorias</h1></div>
+        <div>
+            <div>
+                <button onclick="document.getElementById('modalAdicionarContainer').style.display='block'">Adicionar</button>
+            </div>
+        </div>
+        
+        <div class="containerListCategorias">
+            <div class="itemCategoria"  *ngFor="let item of categoriasCadastradas">
+                <div>
+                 Id - {{item.id}}
+                </div>
+               <div class="textoItemCategoria" >
+                Nome - {{item.nome}}
+               </div>
+               <div class="textoItemCategoria">
+                Descrição - {{item.descricao}}
+               </div>
+       </div>
+            
+        </div>
+</div>
+
+<div *ngFor="let item of objetoCategorias">
+    <button>{{objetoCategorias.indexOf(item)}}</button>
+</div>
+
+
+<div id="modalAdicionarContainer" class="modalAdicionarContainer" hidden="true">
+        <div class="modalAdicionar">
+            <form action="" [formGroup]="formCategoria">
+                <div>
+                    <input type="text" placeholder="Nome da Categoria" style="text-align: center;" formControlName="nome">
+                </div>
+                <div>
+                    <input type="text" placeholder="Descrição da Categoria" style="text-align: center;" formControlName="descricao">
+                </div>
+                <div style="display: flex;justify-content: center;">
+                    <button (click)="postCategoria()">Cadastrar</button>
+                    <button onclick="document.getElementById('modalAdicionarContainer').style.display='none'">Cancelar</button>
+                </div>
+            </form>
+       </div>
+</div>

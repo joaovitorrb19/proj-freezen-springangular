@@ -1,0 +1,76 @@
+
+
+.containerGeral{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    left: 25%;
+    top: 10%;
+}
+
+.containerListCategorias{
+    background-color: gray;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media screen and (max-width:500px) {
+    
+}
+
+.itemCategoria{
+    margin: 5px;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(225, 226, 228);
+}
+
+.textoItemCategoria{
+    max-height: 3em;
+    line-height: 1.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.modalAdicionarContainer{
+    position: fixed;
+    display: none;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    left: 0;
+    top: 0;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modalAdicionar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 300px;
+    height: 300px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-color: rgb(212, 212, 212);
+}
+
+.modalAdicionar div{
+    margin-bottom: 6px;
+}

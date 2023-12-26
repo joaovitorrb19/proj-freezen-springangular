@@ -2,11 +2,62 @@
     width: 100%;
     background-color: aqua;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center ;
-    position: fixed;
+    position: relative;
     top: 0;
     right: 0;
+}
+
+.imgMenuFlex{
+  position: relative;
+  margin: 5px;
+}
+
+.flexPesquisa{
+  display: flex;
+  flex-grow: 0.5;
+}
+
+.inputFlexPesquisa{
+  left: 25%;
+  height: 25px;
+  width: 210px;
+}
+
+.imgLupaFlexPesquisa{
+  cursor: pointer;
+  position: relative;
+  left: -20px;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+}
+
+@media screen and (max-width:768px){
+  .inputFlexPesquisa{
+    height: 25px;
+    width: 100%;
+  }
+
+}
+
+@media screen and (min-width:769px) {
+  .inputFlexPesquisa{
+    height: 25px;
+    width: 300px;
+  }
+
+  .flexBotoes{
+    
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.imgCarrinhoFlex{
+  position: relative;
+  right: 5px;
 }
 
 .imgMenu{
@@ -32,29 +83,58 @@
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
+.modal-pgcontainer{
+  width: 250px;
+  height: 100%;
+  float: left;
+}
+
+.menu-modal-conteudo{
+  background-color: #f3f1f1;
+  width: 180px;
+  height: 100%;
+}
+
+.close{
+position: relative;
+top: 20px;
+color: #000000;
+float: right;
+right : 30px;
+font-size: 48px;
+font-weight: bold;
+}
+
+
 .carrinho-modal-conteudo{
-  background-color: #fefefe;
+  background-color: #bdb7b7;
   margin: 0 0 0 0; /* 15% from the top and centered */
-  padding: 20px;
   border: 1px solid #888;
-  width: 300px;
+  width: 320px;
   height: 100%;
   float: right;
 }
 
-.menu-modal-conteudo{
-    background-color: #fefefe;
-    margin: 0 0 0 0;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 300px;
-    height: 100%;
-    float: left;
+.botoesLoginCadastrar{
+  margin: 1px;
 }
 
-.close{
-    color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+.menu-modal-conteudo{
+  display: flex;
+  flex-direction: column;
+}
+
+.divMenu{
+  margin-bottom: 1px;
+  border: 1px solid #c22d2d;
+  width: 99%;
+  background-color: #000000;
+  color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.divMenu:hover{
+  background-color: #4d4c4c;
 }

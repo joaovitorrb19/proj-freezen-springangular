@@ -1,6 +1,6 @@
+<img src="/assets/zenitsu01.png" class="imgZenitsu">
 <div class="container-cadastro">
-
-    <form [formGroup]="formTest" (ngSubmit)="enviarFormulario()">
+    <form [formGroup]="formCadastro">
         <div>
             <input type="text" formControlName="email" id="email" placeholder="Email" 
             [ngClass]="{'erroInput' : this.getErrorDirty('email','email') || this.getErrorTouched('email','required')}">
@@ -22,20 +22,25 @@
         </div>
 
         <div>
+            <input type="date" id="nascimento"  formControlName="nascimento" 
+            [ngClass]="{'erroInput' : this.getErrorTouched('telefone','required') || this.getErrorDirty('telefone','TelefoneErro')}">
+        </div>
+
+        <div>
                 <input type="{{inputTypePass}}" id="passsword" class="password" placeholder="Senha" formControlName="password" 
-                [ngClass]="{'erroInput' : this.getErrorTouched('password','required') || this.getErrorDirty('password','PasswordErro')}">
+                [ngClass]="{'erroInput' : this.getErrorTouched('password','required') || this.getErrorDirty('password','PasswordErro')}" (blur)="verificarConfSenha()">
                 <img src="/assets/ocultar.png" class="img-hidden" (click)="alterarHiddenPassword()">
         </div>
         
         <div>
             <input type="{{inputTypeConfPass}}" id="confPassword" class="password" placeholder="Confirmação Senha" formControlName="confPassword"
-                   (blur)="verificarConfSenha()" [ngClass]="{'erroInput' : this.formTest.get('confPassword')?.getError('confPassInvalid')}">
+                   (blur)="verificarConfSenha()" [ngClass]="{'erroInput' : this.formCadastro.get('confPassword')?.getError('confPassInvalid')}">
             <img src="/assets/ocultar.png" class="img-hidden" (click)="alterarHiddenConfPassword()">
         </div>
 
         <div class="divBotoes">
             <div>
-                <button type="button" [disabled]="this.formTest.get('confPassword')?.invalid">Cadastrar</button>
+                <button type="button" [disabled]="this.formCadastro.get('confPassword')?.invalid" (click)="enviarFormularioCadastro()">Cadastrar</button>
             </div>
             <div>
                 <button type="button">Esqueci Senha</button>

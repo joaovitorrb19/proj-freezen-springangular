@@ -1,0 +1,15 @@
+
+
+<div class="container">
+    <div>
+        <span>ValorMin -- {{valorMin}}</span>
+        <span>Teste -- {{valorMax}}</span>
+    </div>
+    <div class="barraProgresso">
+            <div class="BarraProgressoSelecionado" style="left: {{valorMinPorcento}}%; right : {{valorMaxPorcento}}%;"></div>
+            <div class="rangesBarraProgresso">
+                <input class="ranges" type="range"  (input)="atualizarBarraMin()" [(ngModel)]="valorMin" min="0" max="9960" step="40">
+                <input class="ranges" type="range" (input)="atualizarBarraMax()"  [(ngModel)]="valorMax" min="40" max="10000" step="40">
+            </div>
+    </div>
+</div>

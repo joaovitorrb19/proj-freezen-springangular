@@ -1,3 +1,4 @@
+<img src="/assets/zenitsu02.webp" class="imgZenitsu">
 <div class="login-modal-pg">
         <form  [formGroup]="formLogin">
         <div>
@@ -11,7 +12,7 @@
 
         <div class="divBotoes">
             <div>
-                <button type="button" [disabled]="this.formLogin.invalid">Login</button>
+                <button type="button" [disabled]="this.formLogin.invalid" (click)="sendLogin()">Login</button>
             </div>
             <div>
                 <button type="button" [routerLink]="'/cadastro'">Cadastrar</button>

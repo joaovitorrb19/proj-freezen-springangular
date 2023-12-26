@@ -1,0 +1,53 @@
+
+
+.container{
+    position: relative;
+    top:50% ;
+    left: 50%;
+    translate: -50% -50%;
+    width: 400px;
+    height: 400px;
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.barraProgresso{
+    position: relative;
+    width: 200px;
+    height: 5px;
+    background-color: rgb(255, 255, 255);
+}
+
+.BarraProgressoSelecionado{
+    position: absolute;
+    width: auto;
+    height: 5px;
+    background-color: rgb(207, 83, 83);
+}
+
+.rangesBarraProgresso{
+    position: absolute;
+    background: none;
+    appearance: none;
+    pointer-events: none;
+}
+
+input[type="range"]::-webkit-slider-thumb{
+    appearance: none;
+    pointer-events: auto;
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    background-color: black;
+}
+
+.ranges{
+    top: -8px;
+    width: 200px;
+    position: absolute;
+    background: none;
+    appearance: none;
+}

@@ -1,21 +1,64 @@
 <div class="menu-inicial">
-    <div><img class="imgMenu" src="/assets/menu.png" onclick="document.getElementById('menumodal').style.display='block'"></div>
-    <div><input type="text"></div>
-    <div><button onclick="document.getElementById('loginmodal').style.display='block'">Login</button></div>
-    <div><img class="imgCarrinho" src="/assets/carrinhopreto.png" alt=""  onclick="document.getElementById('carrinhomodal').style.display='block'"></div>
+    <div>
+        <img class="imgMenu" src="/assets/menu.png" onclick="document.getElementById('menumodal').style.display='block'" class="imgMenuFlex">
+    </div>
+    <div class="flexPesquisa">
+        <input type="text" class="inputFlexPesquisa">
+        <img src="/assets/lupa.png" class="imgLupaFlexPesquisa">
+    </div>
+
+    <div *ngIf="widhtMaiorQue768()">
+    <div *ngIf="taLogado == false; else naoLogado">
+        <button routerLink="/login" style="margin: 10px;">Login</button>
+        <button routerLink="/cadastro">Cadastrar</button>
+    </div>
+
+    <ng-template #naoLogado>
+        <div>
+            <p>Bem vindo {{this.getNome()}}</p>
+        </div>
+        <div>
+            <button (click)="deslogar()">Logout</button>
+        </div>
+    </ng-template>
 </div>
 
+    <div><img class="imgCarrinho" src="/assets/carrinhopreto.png" alt=""  onclick="document.getElementById('carrinhomodal').style.display='block'" class="imgCarrinhoFlex"></div>
+</div>
+
+
+<div id="menumodal" class="modal-pgfull">
+    <div class="modal-pgcontainer">
+        <span onclick="document.getElementById('menumodal').style.display='none'" class="close" style="cursor: pointer;">&times;</span>
+    <div class="menu-modal-conteudo" *ngIf=" this.taLogado === false ; else taLogadoDiv">
+        <div class="divMenu">
+            <p routerLink="/login" onclick="document.getElementById('menumodal').style.display='none'">Login</p>
+        </div>
+        <div class="divMenu">
+            <p  routerLink="/cadastro" onclick="document.getElementById('menumodal').style.display='none'">Cadastrar</p>
+        </div>
+    </div>
+
+    <ng-template #taLogadoDiv>
+        <div class="menu-modal-conteudo">
+            <div style="text-align: center;">
+                <p>Bem vindo {{this.getNome()}}</p>
+            </div>
+            <div class="divMenu">
+                    <p style="cursor: pointer;" (click)="deslogar()">Sair</p>
+            </div>
+        </div>   
+    </ng-template>
+    
+</div>
+</div>
+
+
+<!-- 
 <div id="carrinhomodal" class="modal-pgfull">
     <div class="carrinho-modal-conteudo">
         <span onclick="document.getElementById('carrinhomodal').style.display='none'" class="close">&times;</span>
         Dsdasda
     </div>
 </div>
-
-<div id="menumodal" class="modal-pgfull">
-    <div class="menu-modal-conteudo">
-        <span onclick="document.getElementById('menumodal').style.display='none'" class="close">&times;</span>
-        DD
-    </div>
-</div>
-
+-->

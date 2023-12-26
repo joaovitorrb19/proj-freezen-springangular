@@ -1,36 +1,65 @@
 package com.userlogin.v1.controller;
 
-import com.userlogin.v1.dto.CadastroDTO;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
-import org.apache.coyote.Response;
+import com.userlogin.v1.domain.entity.Usuario;
+import com.userlogin.v1.domain.service.UsuarioService;
+import com.userlogin.v1.dto.usuario.CadastroDTO;
+import com.userlogin.v1.dto.usuario.LoginDTO;
+import com.userlogin.v1.security.TokenService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
 @RequestMapping("usuario")
 public class UsuarioController {
 
-    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 
-    Validator validator = this.factory.getValidator();
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @PostMapping("cadastro")
-    public ResponseEntity Cadstro(@RequestBody CadastroDTO cadastroDto){
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<Set<String>> Cadastro(@RequestBody CadastroDTO cadastroDto){
 
-        Set<ConstraintViolation<CadastroDTO>> validate = validator.validate(cadastroDto);
+        Set<String> cadastro = this.usuarioService.Cadastro(cadastroDto);
 
-        if(!validate.isEmpty())
-            return ResponseEntity.badRequest().body(validate.stream().map(x -> x.getMessage()));
+        return ResponseEntity.ok(cadastro);
+    }
 
-        return ResponseEntity.ok("Cadastro feito com sucesso");
+    @PostMapping("login")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity Login(@RequestBody LoginDTO loginDTO){
+
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword());
+
+        try {
+            Authentication authenticate = this.authenticationManager.authenticate(authenticationToken) ;
+            return ResponseEntity.ok().body(TokenService.gerarToken(loginDTO.getEmail()));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Credenciais inválidas");
+        }
+
+    }
+
+    @GetMapping("getall")
+    @Secured("ADMIN")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<List<Usuario>> GetAll(){
+
+        List<Usuario> usuarios = this.usuarioService.GetAll();
+
+        return ResponseEntity.ok(usuarios);
+
     }
 
 }

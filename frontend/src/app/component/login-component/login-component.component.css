@@ -1,13 +1,23 @@
 .login-modal-pg{
     display: flex;
-    position: relative;
+    position: absolute;
     width: fit-content;
     height: fit-content;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    left: 30%;
-    top: 250px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.imgZenitsu{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-34%,-120%);
 }
 
 .divBotoes{
