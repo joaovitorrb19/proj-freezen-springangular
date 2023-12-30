@@ -1,1 +1,38 @@
-<p>produto works!</p>
+
+<div class="containerGeral">
+    <div>
+        <button (click)="openModalAddCategoria()">Adicionar</button>
+    </div>
+    <div>
+    </div>
+</div>
+
+<div id="modalAdicionar" class="modalContainerAdicionar">
+    <div class="modalAdicionar">
+        <div class="modalAdicionar2">
+            <form [formGroup]="formProduto">
+                <div>
+                    <input type="text" formControlName="nome" placeholder="Nome do produto">
+                </div>
+                <div>
+                    <input type="text" formControlName="descricao" placeholder="Descrição do produto">
+                </div>
+                <div>
+                    <input type="number" formControlName="preco" placeholder="25.52">
+                </div>
+                <div class="containerCheckboxCategoria">
+                    <div *ngFor="let item of categoriasCadastradas">
+                        <input type="checkbox" id="{{item.nome}}" value="{{item.id}}" (click)="adicionarCategoriaNoArray(item.id)">
+                        <label for="{{item.nome}}">{{item.nome}}</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div>
+            <input type="file" (change)="popularImagem($event)" class="tipoImg">
+        </div>
+        <div>
+            <button (click)="postProduto()">Cadastrar</button>
+        </div>
+    </div>
+</div>

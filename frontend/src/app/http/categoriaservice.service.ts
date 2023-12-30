@@ -27,4 +27,12 @@ export class CategoriaserviceService implements OnInit{
     return this.http.get<CategoriaDTO[]>('http://localhost:8080/categoria/get')
   }
 
+  updateCategoria(id : Number,nome:String,descricao:String) : Observable<any>{
+    return this.http.put<any>('http://localhost:8080/categoria/update',{'id':id,'nome':nome,'descricao':descricao})
+  }
+
+  deleteCategorria(id :Number):Observable<any>{
+    return this.http.delete<any>('http://localhost:8080/categoria/delete/'+id)
+  }
+
 }

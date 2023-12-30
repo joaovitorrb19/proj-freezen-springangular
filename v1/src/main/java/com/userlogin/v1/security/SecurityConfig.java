@@ -45,6 +45,7 @@ public class SecurityConfig {
                          x.requestMatchers("usuario/cadastro").permitAll()
                          .requestMatchers("usuario/login").permitAll()
                          .requestMatchers("categoria/**").permitAll()
+                         .requestMatchers("produto/**").permitAll()
                          .anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider())
                 .cors(x -> x.configurationSource(corsConfigurationSource()))

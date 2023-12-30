@@ -13,7 +13,7 @@ export class ErrorHandlerService implements HttpInterceptor{
 
   
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<RespostaDTO>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req)
     .pipe(
       catchError((error: HttpErrorResponse) => {

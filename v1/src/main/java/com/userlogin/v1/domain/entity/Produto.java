@@ -20,11 +20,12 @@ public class Produto implements Serializable {
 
     private Double preco;
 
-
     private String dataCriacao = LocalDate.now().toString();
 
     @ManyToMany
     private List<Categoria> categorias;
+
+    private String enderecoImg ;
 
     public Produto() {
     }

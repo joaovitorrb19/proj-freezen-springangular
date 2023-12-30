@@ -1,6 +1,7 @@
 package com.userlogin.v1.domain.service;
 
 import com.userlogin.v1.domain.entity.Categoria;
+import com.userlogin.v1.domain.exceptions.UniqueException;
 import com.userlogin.v1.domain.repository.CategoriaRepository;
 import com.userlogin.v1.dto.categoria.CategoriaUpdateDTO;
 import com.userlogin.v1.dto.categoria.PostCategoriaDTO;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -39,7 +39,13 @@ public class CategoriaService {
 
         Categoria categoria = CategoriaMapper.INSTANCE.dtoToCategoria(postCategoriaDTO);
 
-        categoriaRepository.save(categoria);
+        try{
+            categoriaRepository.save(categoria);
+        } catch(Exception e){
+                throw new UniqueException("Categoria " + postCategoriaDTO.getNome() + " já existe.");
+        }
+        
+
         resposta.add("Categoria "+categoria.getNome() + " cadastrada com sucesso!");
 
         return resposta;

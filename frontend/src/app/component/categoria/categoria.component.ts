@@ -22,10 +22,18 @@ export class CategoriaComponent implements OnInit{
       descricao : new FormControl('',[Validators.required])
     });
 
+    formCategoriaUpdate : FormGroup = new FormGroup({
+        id : new FormControl(0,[Validators.required]),
+        nome : new FormControl('',[Validators.required]),
+        descricao : new FormControl('',[Validators.required]),
+    })
+
     categoriasCadastradas :  CategoriaDTO [] = [];
 
-    objetoCategorias : CategoriaDTO[][] = [[]]
+    numPaginas : number [] = []
 
+    minNUm : number = 0
+    maxNum : number = 9
 
   ngOnInit(): void {
     this.getCategorias();
@@ -33,20 +41,19 @@ export class CategoriaComponent implements OnInit{
     setTimeout(() => {
       this.calcularItensPagina()
     },5000)
-
   }
 
-
     postCategoria(){
+
       this.categoriaHttp.sendPostCategoria(this.formCategoria.get('nome')?.value!,this.formCategoria.get('descricao')?.value!)
       .subscribe((sucess) => {
           document.getElementById('modalAdicionarContainer')?.setAttribute("style","display:none")
-          this.formCategoria.reset;
+          this.formCategoria.reset();
           setTimeout(() => {
             this.getCategorias()
-          },3000)
+            this.formCategoria.reset;
+          },6000)
       }, (error) => {
-       
         console.log("Deu erro")
       })
     }
@@ -55,36 +62,73 @@ export class CategoriaComponent implements OnInit{
     getCategorias(){
      this.categoriaHttp.getAllCategorias().subscribe((sucesso) => {
       this.categoriasCadastradas = sucesso;
+      this.calcularItensPagina()
      }, (erro) => {
 
      }
      )
     }
 
+     nomeCategoriaUpdate : String = '';
+     idCategoriaUpdate : Number = 0
+     descricaoCategoriaUpdate : String = ''
+
+    updateCategoriaModal(categoria : CategoriaDTO){
+      this.idCategoriaUpdate = categoria.id
+      this.nomeCategoriaUpdate = categoria.nome
+      this.descricaoCategoriaUpdate = categoria.descricao
+
+      document.getElementById('modalUpdateContainer')?.style.setProperty('display','block')
+
+    }
+
+    updateCategoria(){
+
+
+      var id = this.formCategoriaUpdate.get('id')?.value === 0 ?  this.idCategoriaUpdate : this.formCategoriaUpdate.get('id')?.value;
+      var nome = this.formCategoriaUpdate.get('nome')?.value ===  '' ? this.nomeCategoriaUpdate : this.formCategoriaUpdate.get('nome')?.value;
+      var descricao = this.formCategoriaUpdate.get('descricao')?.value === '' ? this.descricaoCategoriaUpdate : this.formCategoriaUpdate.get('descricao')?.value;
+
+      console.log(id,descricao,nome)
+      this.categoriaHttp.updateCategoria(id,nome,descricao).subscribe();
+
+      this.formCategoriaUpdate.reset;
+      this.idCategoriaUpdate = 0;
+      this.nomeCategoriaUpdate = '';
+      this.descricaoCategoriaUpdate = '';
+      document.getElementById('modalUpdateContainer')?.style.setProperty('display','none')
+    }
+
+    deleteCategoria(int : Number){
+      this.categoriaHttp.deleteCategorria(int).subscribe()
+    }
+    
  
     calcularItensPagina(){
 
+        this.numPaginas = []
+        var numPg = Math.ceil(this.categoriasCadastradas.length / 10);
 
-
-      var contador = 0;
-
-      var numPaginas = Math.ceil(this.categoriasCadastradas.length / 10);
-
-      for(var i = 0 ; i <= numPaginas; i++){
-
-        var objetoCateg : CategoriaDTO [] = []
-
-        for(var ii = 0; i < contador + 10; ii ++){
-
-            objetoCateg.push(this.categoriasCadastradas[ii])
-            contador =+ 1;
+        for(var i = 0; i < numPg;i++){
+          this.numPaginas.push(i)
         }
-          this.objetoCategorias.push(objetoCateg);
-      }
-
-      console.log(numPaginas)
-      console.log(this.objetoCategorias)
 
     }
     
+    mudarValoresMinMax(numero : number){
+
+      switch (numero) {
+        case 0:
+          this.minNUm = 0,this.maxNum = 9;
+          break;
+          case 1:
+          this.minNUm = 10,this.maxNum = 19;
+          break;
+          case 2:
+          this.minNUm = 20,this.maxNum = 29;
+          break;
+      }
+
+    }
+
 }
