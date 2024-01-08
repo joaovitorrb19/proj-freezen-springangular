@@ -24,8 +24,8 @@ public class CustomFilter extends OncePerRequestFilter {
     private UsuarioService usuarioService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {     
+        
         String authorization = request.getHeader("Authorization");
         String tokenJWT = "";
         String emailUsuarioRequest = "";
@@ -35,8 +35,8 @@ public class CustomFilter extends OncePerRequestFilter {
 
 
         if(authorization != null){
-            // tokenJWT = authorization.substring(7);
-            tokenJWT = authorization;
+            tokenJWT = authorization.substring(9,179);
+            System.out.println(authorization);
              emailUsuarioRequest = TokenService.getSubject(tokenJWT);
 
             UserDetails userDetails = this.usuarioService.loadUserByUsername(emailUsuarioRequest);

@@ -7,6 +7,7 @@ import com.userlogin.v1.dto.categoria.ViewModelCategoriaDTO;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -21,6 +22,7 @@ public class CategoriaController {
     private CategoriaService categoriaService;
 
     @PostMapping("post")
+    @Secured("ADMIN")
     public ResponseEntity<Set<String>> Post(@RequestBody PostCategoriaDTO categoria){
         return ResponseEntity.ok().body(categoriaService.Post(categoria));
     }
@@ -39,12 +41,16 @@ public class CategoriaController {
     }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity Delete(@PathVariable int id){
+    @Secured("ADMIN")
+    public ResponseEntity<Set<String>> Delete(@PathVariable int id){
         this.categoriaService.Delete(id);
-        return ResponseEntity.ok().build();
+        Set<String> resposta = new HashSet<String>();
+        resposta.add("Deletado com sucesso");
+        return ResponseEntity.ok(resposta);
     }
 
     @PutMapping("update")
+    @Secured("ADMIN")
     public ResponseEntity Update(@RequestBody CategoriaUpdateDTO categoriaUpdateDTO){
         CategoriaUpdateDTO update = this.categoriaService.Update(categoriaUpdateDTO);
         return ResponseEntity.ok(update);

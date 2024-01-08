@@ -4,7 +4,7 @@ export function PasswordValidator() : ValidatorFn {
     
     return (control : AbstractControl) : ValidationErrors | null => {
 
-            const regex = RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$/)
+            const regex = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,15}$/)
             return regex.test(control.value) ? null : {PasswordErro : {value:control.value}}
             
     }

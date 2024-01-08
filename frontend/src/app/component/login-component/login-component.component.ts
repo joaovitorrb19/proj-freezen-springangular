@@ -13,7 +13,7 @@ import { PasswordValidator } from 'src/app/validators/passwordvalidator';
 })
 export class LoginComponentComponent implements OnInit{
 
-  constructor(private loginHTTP : LoginCadastroService,private loginLogoutSubject : LoginlogoutsubjectService,private router : Router){
+  constructor(private loginHTTP : LoginCadastroService,private loginLogoutSubject : LoginlogoutsubjectService,private router : Router,private snack : MatSnackBar){
 
   }
 
@@ -26,6 +26,23 @@ export class LoginComponentComponent implements OnInit{
     password : new FormControl('',[Validators.required,PasswordValidator()])
   })
 
+  validarPassword(){
+    // this.formLogin.get('password')?.setValidators(PasswordValidator);
+    this.formLogin.get('password')?.updateValueAndValidity();
+  }
+
+  inputTypePass : String = 'password';
+
+  alterarHiddenPassword(){
+
+    if(this.inputTypePass.toString() == 'text'){
+      this.inputTypePass = 'password';
+    } else {
+      this.inputTypePass = 'text';
+    }
+  }
+
+
   getErrorDirty(nomeForm : string ,erroForm : string){
     return this.formLogin.get(nomeForm)?.getError(erroForm) && this.formLogin.get(nomeForm)?.dirty
   }
@@ -35,6 +52,28 @@ export class LoginComponentComponent implements OnInit{
   }
 
   sendLogin(){
+
+    if(!this.formLogin.valid){
+        var resposta = '';
+
+        var email = this.formLogin.get('email');
+        var password = this.formLogin.get('password');
+
+        if(email?.getError('required'))
+              resposta += "Email requirido" + "\n" + ' ';
+
+        if(email?.getError('email'))
+            resposta += "Email invalido" + "\n" + ' ';
+        
+        if(password?.getError('required'))
+              resposta += "Senha requirida" + "\n" + ' ';
+
+        if(password?.getError('PasswordErro'))
+              resposta +=  "Min 1 caractere especial, 1 maisculo e 1 minusculo, de 8 a 15 caracteres" + "\n" + ' ';
+
+        this.snack.open(resposta,"X",{verticalPosition:'top',horizontalPosition:'center',duration:5000,panelClass: ['error-snackbar'] })
+
+    } else {
       var token : string
       this.loginHTTP.sendLogin(this.formLogin.get('email')?.value!,this.formLogin.get('password')?.value!)
       .subscribe((response) => {
@@ -44,6 +83,8 @@ export class LoginComponentComponent implements OnInit{
       },(error) => {
         
       })
+    }
+
   }
 
 }

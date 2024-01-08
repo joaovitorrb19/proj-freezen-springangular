@@ -1,0 +1,110 @@
+
+<div class="containerGeral">
+    <div>
+        <button (click)="openModalAddCategoria()">Adicionar</button>
+    </div>
+    <div style="display: flex; flex-direction: row;">
+    <div *ngFor="let item of produtos" >
+        <div *ngIf="produtos.indexOf(item) >= this.valorMinPorPagina && produtos.indexOf(item) <= this.valorMaxPorPagina">
+            <div class="containerParaCadaProduto">
+
+            <div style="margin: 5px;"><img class="containerParaCadaProdutoIMG" src="{{item.enderecoImg.substring(71)}}" >
+            
+            </div>
+                <div class="txtProdutoContainer" style="margin: 5px;">
+                    {{item.nome}}
+                </div>
+                <div class="txtProdutoContainer" style="margin: 5px;">
+                    <div class="txtProduto">
+                        {{item.descricao}}
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-around; width: 80%;">
+                    <div>
+                        {{ item.preco | currency:'BRL'}}
+                    </div>
+                    <div>
+                        <button (click)="openUpdateModal(item)">Editar</button>
+                    </div>
+                    <div>
+                        <img style="width: 25x; height: 25px; cursor: pointer;" src="/assets/verifica.png" >
+                    </div>
+                </div>
+        </div>
+    </div>
+    </div>
+</div>
+<div>
+    <div *ngFor="let item of arrayQuantidadePaginas">
+        <button (click)="mudarPagina(item)">{{item}}</button>
+    </div>
+</div>
+</div>
+
+
+
+
+<div id="modalAdicionar" class="modalContainerAdicionar">
+<div class="modalAdicionar">
+    <div class="modalAdicionar2">
+        <form [formGroup]="formProduto">
+            <div>
+                <input type="text" formControlName="nome" placeholder="Nome do produto">
+            </div>
+            <div>
+                <input type="text" formControlName="descricao" placeholder="Descrição do produto">
+            </div>
+            <div>
+                <input type="number" formControlName="preco" placeholder="25.52">
+            </div>
+            <div class="containerCheckboxCategoria">
+                <div *ngFor="let item of categoriasCadastradas">
+                    <input type="checkbox" id="{{item.nome}}" value="{{item.id}}" (click)="adicionarCategoriaNoArray(item.id)">
+                    <label for="{{item.nome}}">{{item.nome}}</label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <input type="file" (change)="popularImagem($event)" class="tipoImg">
+    </div>
+    <div>
+        <button (click)="postProduto()">Cadastrar</button>
+    </div>
+</div>
+</div>
+
+<div id="modalUpdate" class="modalContainerAdicionar">
+<div class="modalAdicionar">
+    <div class="modalAdicionar2">
+            <div>
+                <input type="text" [(ngModel)]="nomeProdutoUpdate">
+            </div>
+            <div>
+                <input type="text" placeholder="Descrição do produto" [(ngModel)]="descricaoProdutoUpdate">
+            </div>
+            <div>
+                <input type="number" placeholder="25.52" [(ngModel)]="precoProdutoUpdate">
+            </div>
+            <div class="containerCheckboxCategoria">
+                <div *ngFor="let item of categoriasCadastradas">
+                    <input type="checkbox" id="{{item.nome}}" value="{{item.id}}" (click)="adicionarCategoriaNoArray(item.id)">
+                    <label for="{{item.nome}}">{{item.nome}}</label>
+                </div>
+            </div>
+    </div>
+    <div>
+        <input type="file" (change)="popularImagemUpdate($event)" class="tipoImg" >
+    </div>
+    <div style="display: flex; justify-content: space-around;">
+
+        <div>
+            <button (click)="updateProdutoModal()">Atualizar</button>
+        </div>
+        
+        <div>
+            <button onclick="document.getElementById('modalUpdate').style.display='none'">Cancelar</button>
+        </div>
+    </div>
+</div>
+</div>

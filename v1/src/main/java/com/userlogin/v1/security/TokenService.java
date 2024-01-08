@@ -14,12 +14,13 @@ public class TokenService {
 
     private static String  chave = "KDASOKFDOAS!%!ASDasfAS!@@SDASDA13125412";
 
-    public static String gerarToken(String email){
+    public static String gerarToken(String email,String authority){
 
         Instant.now().atOffset(ZoneOffset.of("-03:00"));
 
         return JWT.create().withSubject(email)
-                .withExpiresAt(Instant.now().atOffset(ZoneOffset.of("-03:00")).toInstant().plus(10L, ChronoUnit.MINUTES))
+                .withExpiresAt(Instant.now().atOffset(ZoneOffset.of("-03:00")).toInstant().plus(10L, ChronoUnit.MINUTES)) 
+                .withClaim("Authority", authority)
                 .sign(Algorithm.HMAC256(chave));
     }
 

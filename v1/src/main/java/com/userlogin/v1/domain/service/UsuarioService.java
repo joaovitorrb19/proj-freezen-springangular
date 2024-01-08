@@ -3,6 +3,7 @@ package com.userlogin.v1.domain.service;
 import com.userlogin.v1.domain.entity.Role;
 import com.userlogin.v1.domain.entity.Usuario;
 import com.userlogin.v1.domain.exceptions.UniqueException;
+import com.userlogin.v1.domain.repository.RoleRepository;
 import com.userlogin.v1.domain.repository.UsuarioRepository;
 import com.userlogin.v1.dto.usuario.CadastroDTO;
 import com.userlogin.v1.mapper.UsuarioMapper;
@@ -22,10 +23,20 @@ public class UsuarioService implements UserDetailsService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     Validator validator = this.factory.getValidator();
 
     public Set<String> Cadastro(CadastroDTO cadastroDTO){
+
+        if(this.roleRepository.findAll().size() == 0){
+                Role roleADM = new Role("ADMIN");
+                this.roleRepository.save(roleADM);
+                Role roleUSER = new Role("USER");
+                this.roleRepository.save(roleUSER);
+        }
 
         Set<String> errors = new HashSet<>();
 
@@ -56,6 +67,7 @@ public class UsuarioService implements UserDetailsService {
         try{
             this.usuarioRepository.save(usuario);
         }catch (RuntimeException e){
+            e.printStackTrace();
             throw new UniqueException("CPF ou EMAIL já cadastrados.");
         }
 

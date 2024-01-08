@@ -23,7 +23,7 @@
     </ng-template>
 </div>
 
-    <div><img class="imgCarrinho" src="/assets/carrinhopreto.png" alt=""  onclick="document.getElementById('carrinhomodal').style.display='block'" class="imgCarrinhoFlex"></div>
+    <div><img class="imgCarrinho" src="/assets/carrinhopreto.png" alt="" routerLink="carrinho" style="cursor: pointer;"  class="imgCarrinhoFlex"></div>
 </div>
 
 
@@ -31,11 +31,14 @@
     <div class="modal-pgcontainer">
         <span onclick="document.getElementById('menumodal').style.display='none'" class="close" style="cursor: pointer;">&times;</span>
     <div class="menu-modal-conteudo" *ngIf=" this.taLogado === false ; else taLogadoDiv">
-        <div class="divMenu">
-            <p routerLink="/login" onclick="document.getElementById('menumodal').style.display='none'">Login</p>
+        <div class="divMenu" routerLink="/login">
+            <p  onclick="document.getElementById('menumodal').style.display='none'">Login</p>
         </div>
-        <div class="divMenu">
-            <p  routerLink="/cadastro" onclick="document.getElementById('menumodal').style.display='none'">Cadastrar</p>
+        <div class="divMenu" routerLink="/cadastro">
+            <p   onclick="document.getElementById('menumodal').style.display='none'">Cadastrar</p>
+        </div>
+        <div class="divMenu" routerLink="/">
+                <p >Home</p>
         </div>
     </div>
 

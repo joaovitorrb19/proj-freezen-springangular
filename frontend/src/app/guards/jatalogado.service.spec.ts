@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SucessHandlerService } from './sucess-handler.service';
+import { JatalogadoService } from './jatalogado.service';
 
-describe('SucessHandlerService', () => {
-  let service: SucessHandlerService;
+describe('JatalogadoService', () => {
+  let service: JatalogadoService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SucessHandlerService);
+    service = TestBed.inject(JatalogadoService);
   });
 
   it('should be created', () => {

@@ -12,13 +12,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatPaginatorModule} from '@angular/material/paginator'
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ErrorHandlerService } from './interceptor/error-handler.service';
-import { SucessHandlerService } from './interceptor/sucess-handler.service';
-import { JwtModule } from '@auth0/angular-jwt';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { FiltroComponent } from './component/filtro/filtro.component';
 import { CategoriaComponent } from './component/categoria/categoria.component';
 import { ProdutoComponent } from './component/produto/produto.component';
 import { MatTableModule } from '@angular/material/table';
+import { VerificarauthserviceService } from './interceptor/verificarauthservice.service';
+import { ProdutoadminComponent } from './component/produtoadmin/produtoadmin.component';
+import { CarrinhoComponent } from './component/carrinho/carrinho.component';
+
 
 export function tokenGetter(){
     return localStorage.getItem('Authorization');
@@ -34,6 +36,8 @@ export function tokenGetter(){
     FiltroComponent,
     CategoriaComponent,
     ProdutoComponent,
+    ProdutoadminComponent,
+    CarrinhoComponent,
     
   ],
   imports: [
@@ -45,18 +49,18 @@ export function tokenGetter(){
     BrowserAnimationsModule,
     MatPaginatorModule,
     MatTableModule,
+    
     MatSnackBarModule,
     JwtModule.forRoot({
       config:{
         tokenGetter : tokenGetter,
-        allowedDomains : ["localhost:8080"],
+        allowedDomains : ["test.testandofreezenapp.rf.gd"],
         disallowedRoutes: []
       }
     })
   ],
   providers: [
-    {provide:HTTP_INTERCEPTORS,useClass:ErrorHandlerService,multi:true},
-    {provide:HTTP_INTERCEPTORS,useClass:SucessHandlerService,multi:true}
+    {provide:HTTP_INTERCEPTORS,useClass:VerificarauthserviceService,multi:true},
   ],
   bootstrap: [AppComponent]
 })

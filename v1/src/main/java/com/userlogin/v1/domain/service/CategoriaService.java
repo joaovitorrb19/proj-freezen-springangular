@@ -60,7 +60,7 @@ public class CategoriaService {
 
 
     public void Delete(int id) {
-
+        
         this.categoriaRepository.deleteById(id);
 
     }

@@ -22,6 +22,10 @@ public class Produto implements Serializable {
 
     private String dataCriacao = LocalDate.now().toString();
 
+    private String idPrecoStripe;
+
+    private String idProdutoStripe;
+
     @ManyToMany
     private List<Categoria> categorias;
 
@@ -39,6 +43,13 @@ public class Produto implements Serializable {
         this.categorias = categorias;
     }
 
+    public Produto(int id, String nome, String descricao, Double preco, String dataCriacao, List<Categoria> categorias,String idProdutoStripe,String idPrecoStripe) {
+        this(id,nome,descricao,preco,dataCriacao,categorias);
+        this.idPrecoStripe = idPrecoStripe;
+        this.idProdutoStripe = idProdutoStripe;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -51,6 +62,8 @@ public class Produto implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    
 
     public int getId() {
         return id;
@@ -99,5 +112,31 @@ public class Produto implements Serializable {
     public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
     }
+
+    public String getEnderecoImg() {
+        return enderecoImg;
+    }
+
+    public void setEnderecoImg(String enderecoImg) {
+        this.enderecoImg = enderecoImg;
+    }
+
+    public String getIdPrecoStripe() {
+        return idPrecoStripe;
+    }
+
+    public void setIdPrecoStripe(String idPrecoStripe) {
+        this.idPrecoStripe = idPrecoStripe;
+    }
+
+    public String getIdProdutoStripe() {
+        return idProdutoStripe;
+    }
+
+    public void setIdProdutoStripe(String idProdutoStripe) {
+        this.idProdutoStripe = idProdutoStripe;
+    }
+
+    
 }
 

@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.userlogin.v1.domain.entity.Categoria;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public class ProdutoEntradaDTO {
 
@@ -15,9 +17,10 @@ public class ProdutoEntradaDTO {
     private String nome;
     @NotBlank(message = "Descrição não pode ficar vaziz")
     private String descricao;
-    @NotBlank(message = "Preço não pode ficar vazio")
+    @NotNull(message = "Preço não pode ser vazio")
+    @Positive(message = "Preço deve ser diferente de 0")
     private Double preco;
-    @NotBlank(message = "Categorias não pode ficar vaziz")
+    @NotNull(message = "Categorias não podem ficar vazias")
     private List<Categoria> categorias;
     @NotBlank(message = "Imagem não pode ficar vazia")
     private String img;

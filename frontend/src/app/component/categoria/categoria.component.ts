@@ -62,7 +62,7 @@ export class CategoriaComponent implements OnInit{
     getCategorias(){
      this.categoriaHttp.getAllCategorias().subscribe((sucesso) => {
       this.categoriasCadastradas = sucesso;
-      this.calcularItensPagina()
+      this.calcularItensPagina();
      }, (erro) => {
 
      }

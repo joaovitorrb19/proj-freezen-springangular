@@ -1,5 +1,6 @@
+
+
 .containerGeral{
-    background-color: rgb(177, 177, 177);
     width: 70%;
     display: flex;
     justify-content: center;
@@ -7,7 +8,19 @@
     position: relative;
     top: 20%;
     left: 15%;
+    flex-wrap: wrap;
+    flex-direction: column;
+}   
+
+.containerListaProdutos{
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
+
 
 .modalContainerAdicionar{
     z-index: 1;
@@ -20,6 +33,37 @@
     left: 0;
     display: none;
 }
+
+.containerParaCadaProduto{
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    box-shadow: 5px 5px 5px rgb(43, 43, 43);
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    
+}
+
+.txtProdutoContainer{
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Define o número de linhas desejado */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: center;
+    line-height: 1.5em;
+    height: 3em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.containerParaCadaProdutoIMG{
+    width: 250px;
+    height: 100px;
+}
+
 .containerCheckboxCategoria{
     width: 200px;
     height: 120px;
@@ -58,4 +102,10 @@
 
 .modalAdicionar div input {
     text-align: center;
+}
+
+.valorTotal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

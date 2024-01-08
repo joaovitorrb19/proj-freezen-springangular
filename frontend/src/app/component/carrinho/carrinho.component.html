@@ -1,0 +1,45 @@
+<div style="width: 300px;position: fixed; top: 15%; left: 42%;display: flex;justify-content: space-around;">
+    <span style="font-size: 20px;background-color: rgb(0, 0, 0);color: rgb(78, 230, 78);">{{this.calcularPrecoTotal()|currency:'BRL'}}</span>
+    <button (click)="finalizarPedido()" [disabled]="this.produtosParaExibir.length == 0">Finalizar Pedido</button>
+</div>
+
+<div class="containerGeral">
+    <div class="containerListaProdutos">
+        <div *ngIf="this.produtosParaExibir.length == 0; else carrinhoPopulado">
+            Carrinho Vazio!
+        </div>
+        <ng-template #carrinhoPopulado>
+            <div class="containerParaCadaProduto" *ngFor="let item of produtosParaExibir">
+                <div style="margin: 5px;"><img class="containerParaCadaProdutoIMG"
+                        src="{{item.produto.enderecoImg.substring(71)}}"></div>
+                <div class="txtProdutoContainer" style="margin: 5px;">
+                    {{item.produto.nome}}
+                </div>
+                <div class="txtProdutoContainer" style="margin: 5px;">
+                    <div class="txtProduto">
+                        {{item.produto.descricao}}
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-around; width: 80%;">
+                    <div>
+                        <input type="number" [(ngModel)]="item.quantidade" style="width: 40px;">
+                    </div>
+                    <div>
+                        {{ item.produto.preco| currency:'BRL'}}
+                    </div>
+                    <div>
+                        <img style="width: 25x; height: 25px; cursor: pointer;" src="/assets/excluir.png"
+                            (click)="excluirCarrinho(item.produto)">
+                    </div>
+                </div>
+                <div class="valorTotal">
+                        <div >
+                          <span>Total: </span> <span style=" color: rgb(41, 238, 41);">{{(item.produto.preco * item.quantidade) | currency:'BRL'}}</span>
+                        </div>
+                </div>
+            </div>
+        </ng-template>
+                
+    </div>
+</div>
+

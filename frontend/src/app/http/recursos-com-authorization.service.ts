@@ -18,7 +18,7 @@ export class RecursosComAuthorizationService {
       })
     }
       console.log(header.headers)
-    return this.http.get<Resposta[]>('http://localhost:8080/usuario/getall',header)
+    return this.http.get<Resposta[]>('https://test.testandofreezenapp.rf.gd/usuario/getall',header)
   }
 
 

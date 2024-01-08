@@ -1,5 +1,6 @@
 package com.userlogin.v1.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.userlogin.v1.domain.entity.Usuario;
 import com.userlogin.v1.domain.service.UsuarioService;
 import com.userlogin.v1.dto.usuario.CadastroDTO;
@@ -11,8 +12,11 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -33,20 +37,25 @@ public class UsuarioController {
 
         Set<String> cadastro = this.usuarioService.Cadastro(cadastroDto);
 
-        return ResponseEntity.ok(cadastro);
+        return ResponseEntity.ok(cadastro); 
     }
 
     @PostMapping("login")
     @CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity Login(@RequestBody LoginDTO loginDTO){
+    public ResponseEntity<List<String>> Login(@RequestBody LoginDTO loginDTO){
+
+        List<String> resposta = new ArrayList<>();
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword());
 
         try {
             Authentication authenticate = this.authenticationManager.authenticate(authenticationToken) ;
-            return ResponseEntity.ok().body(TokenService.gerarToken(loginDTO.getEmail()));
+            UserDetails userByUsername = this.usuarioService.loadUserByUsername(loginDTO.getEmail());
+            resposta.add(TokenService.gerarToken(loginDTO.getEmail(),userByUsername.getAuthorities().toString()));
+            return ResponseEntity.ok().body(resposta);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Credenciais inválidas");
+            resposta.add("Credenciais invalidas");
+            return ResponseEntity.badRequest().body(resposta);
         }
 
     }

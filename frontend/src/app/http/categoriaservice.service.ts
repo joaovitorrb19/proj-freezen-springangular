@@ -20,19 +20,19 @@ export class CategoriaserviceService implements OnInit{
   }
 
   sendPostCategoria(nome : String,descricao : String) : Observable<any> {
-      return this.http.post<any>('http://localhost:8080/categoria/post',{'nome': nome,'descricao':descricao})
+      return this.http.post<any>('https://test.testandofreezenapp.rf.gd/categoria/post',{'nome': nome,'descricao':descricao})
   }
 
   getAllCategorias():Observable<CategoriaDTO[]>{
-    return this.http.get<CategoriaDTO[]>('http://localhost:8080/categoria/get')
+    return this.http.get<CategoriaDTO[]>('https://test.testandofreezenapp.rf.gd/categoria/get')
   }
 
   updateCategoria(id : Number,nome:String,descricao:String) : Observable<any>{
-    return this.http.put<any>('http://localhost:8080/categoria/update',{'id':id,'nome':nome,'descricao':descricao})
+    return this.http.put<any>('https://test.testandofreezenapp.rf.gd/categoria/update',{'id':id,'nome':nome,'descricao':descricao})
   }
 
   deleteCategorria(id :Number):Observable<any>{
-    return this.http.delete<any>('http://localhost:8080/categoria/delete/'+id)
+    return this.http.delete<any>('https://test.testandofreezenapp.rf.gd/categoria/delete/'+id)
   }
 
 }

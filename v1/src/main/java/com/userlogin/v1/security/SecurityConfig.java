@@ -75,12 +75,12 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedOrigins(Arrays.asList("https://freezenfrontend.azurewebsites.net/"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("Content-Type","Authorization"));
-//       configuration.addExposedHeader("Authorization");
-//       configuration.setAllowCredentials(false);
-//        configuration.setMaxAge(3600L);
+       configuration.addExposedHeader("Authorization");
+       configuration.setAllowCredentials(false);
+       configuration.setMaxAge(3600L);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**",configuration);
         return source;
