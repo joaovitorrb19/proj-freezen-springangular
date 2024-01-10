@@ -75,7 +75,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://freezenfrontend.azurewebsites.net/"));
+        configuration.setAllowedOrigins(Arrays.asList("https://9882-2804-7f3-597-ef85-9a7-2f5-5cef-bf7e.ngrok-free.app"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("Content-Type","Authorization"));
        configuration.addExposedHeader("Authorization");
